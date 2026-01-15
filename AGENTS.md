@@ -2,7 +2,7 @@
 - Project name: Unity Learn
 - Unity version: Unity 6000.3.2f1
 - Active game object:
-  - Name: Explosion_Dirt_FX
+  - Name: TitlePanel
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
