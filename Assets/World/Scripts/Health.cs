@@ -8,6 +8,12 @@ public class Health : MonoBehaviour
 
     public float CurrentHealth { get; set; }
 
+    public float CurrentHealthPercentage
+    {
+        get { return CurrentHealth / maxHealth; }
+    }
+
+    float health = 0;
     bool destroyed = false;
 
     void Start()
@@ -41,5 +47,10 @@ public class Health : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    }
+    
+    public void OnHeal(float amount)
+    {
+        CurrentHealth += amount;
     }
 }

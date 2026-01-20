@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Tank : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class Tank : MonoBehaviour
     [SerializeField] GameObject ammo;
     [SerializeField] GameObject muzzle;
 
+    [SerializeField] Slider healthBar;
+
     InputAction moveAction;
     InputAction lookAction;
     InputAction attackAction;
+
+    Health health;
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -19,6 +24,8 @@ public class Tank : MonoBehaviour
         attackAction = InputSystem.actions.FindAction("Attack");
 
         attackAction.started += ctx => OnAttack();
+
+        health = GetComponent<Health>();
     }
 
     void Update()
@@ -46,6 +53,7 @@ public class Tank : MonoBehaviour
         //{
         //    Instantiate(ammo, muzzle.transform.position, muzzle.transform.rotation);
         //}
+        healthBar.value = health.CurrentHealthPercentage;
     }
 
     void OnAttack()
