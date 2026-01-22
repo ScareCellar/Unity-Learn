@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Rocket
   damage: 1
   effect: {fileID: 1404802046468498, guid: 2938def9583039b498280fae52bf6fd4, type: 3}
-  speed: 50
+  speed: 100
 --- !u!33 &8028936957776426048
 MeshFilter:
   m_ObjectHideFlags: 0
