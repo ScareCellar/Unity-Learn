@@ -8,7 +8,8 @@ public class Tank : MonoBehaviour
     [SerializeField] float rotationSpeed = 90.0f; // rotation in degrees per second
 
     [SerializeField] GameObject ammo;
-    [SerializeField] GameObject muzzle;
+    [SerializeField] Transform muzzle;
+    [SerializeField] GameObject fireEffect;
 
     [SerializeField] Slider healthBar;
 
@@ -56,8 +57,14 @@ public class Tank : MonoBehaviour
         healthBar.value = health.CurrentHealthPercentage;
     }
 
+    void Die()
+    {
+
+    }
+
     void OnAttack()
     {
-        Instantiate(ammo, muzzle.transform.position, muzzle.transform.rotation);
+        Instantiate(ammo, muzzle.transform.position, muzzle.rotation);
+        if(fireEffect != null) Instantiate(fireEffect, muzzle.transform.position, muzzle.rotation);
     }
 }
