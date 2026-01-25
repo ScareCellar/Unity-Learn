@@ -4,7 +4,12 @@ using UnityEngine;
 public class TankGameManager : MonoBehaviour
 {
     [SerializeField] GameObject titlePanel;
-    [SerializeField] TMP_Text scoreText;
+    [SerializeField] GameObject gamePanel;
+    [SerializeField] GameObject deadPanel;
+    [SerializeField] GameObject winPanel;
+    [SerializeField] GameObject tank;
+
+
     [SerializeField] bool debug = false;
 
     static TankGameManager instance;
@@ -25,17 +30,28 @@ public class TankGameManager : MonoBehaviour
     {
         Time.timeScale = (debug) ? 1.0f : 0.0f;
         titlePanel.SetActive(!debug);
+        gamePanel.SetActive(debug);
     }
 
     
     void Update()
     {
-        scoreText.text = Score.ToString();
+        if(tank == null)
+        {
+            deadPanel.SetActive(true);
+            gamePanel.SetActive(false);
+        }
+        if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        {
+            winPanel.SetActive(true);
+            gamePanel.SetActive(false);
+        }
     }
 
     public void OnGameStart()
     {
         titlePanel.SetActive(false);
+        gamePanel.SetActive(true);
         Time.timeScale = 1.0f;
     }
 

@@ -12,6 +12,7 @@ public class Tank : MonoBehaviour
     [SerializeField] GameObject fireEffect;
 
     [SerializeField] Slider healthBar;
+    [SerializeField] GameObject deathPanel;
 
     InputAction moveAction;
     InputAction lookAction;
@@ -55,11 +56,12 @@ public class Tank : MonoBehaviour
         //    Instantiate(ammo, muzzle.transform.position, muzzle.transform.rotation);
         //}
         healthBar.value = health.CurrentHealthPercentage;
+        
     }
 
-    void Die()
+    private void OnDestroy()
     {
-
+        deathPanel.SetActive(true);
     }
 
     void OnAttack()
