@@ -1,5 +1,5 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TankGameManager : MonoBehaviour
 {
@@ -7,7 +7,6 @@ public class TankGameManager : MonoBehaviour
     [SerializeField] GameObject gamePanel;
     [SerializeField] GameObject deadPanel;
     [SerializeField] GameObject winPanel;
-    [SerializeField] GameObject tank;
 
 
     [SerializeField] bool debug = false;
@@ -36,7 +35,7 @@ public class TankGameManager : MonoBehaviour
     
     void Update()
     {
-        if(tank == null)
+        if(GameObject.FindGameObjectsWithTag("Player").Length == 0)
         {
             deadPanel.SetActive(true);
             gamePanel.SetActive(false);
@@ -58,5 +57,20 @@ public class TankGameManager : MonoBehaviour
     public void OnGameWin()
     {
         Time.timeScale = 0.0f;
+    }
+
+    public void OnRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnQuit()
+    {
+        #if UNITY_STANDALONE
+            Application.Quit();
+        #endif
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }

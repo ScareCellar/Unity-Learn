@@ -9,10 +9,12 @@ public class Tank : MonoBehaviour
 
     [SerializeField] GameObject ammo;
     [SerializeField] Transform muzzle;
+    [SerializeField] float shootCooldown;
     [SerializeField] GameObject fireEffect;
 
     [SerializeField] Slider healthBar;
-    [SerializeField] GameObject deathPanel;
+
+    private float shootTimer;
 
     InputAction moveAction;
     InputAction lookAction;
@@ -28,10 +30,13 @@ public class Tank : MonoBehaviour
         attackAction.started += ctx => OnAttack();
 
         health = GetComponent<Health>();
+
+        shootTimer = shootCooldown;
     }
 
     void Update()
     {
+        shootTimer -= Time.deltaTime;
         // direction (forward/backward movement)
         float direction = moveAction.ReadValue<Vector2>().y;
         //if (Keyboard.current.wKey.isPressed) direction = +1.0f;
@@ -59,14 +64,14 @@ public class Tank : MonoBehaviour
         
     }
 
-    private void OnDestroy()
-    {
-        deathPanel.SetActive(true);
-    }
-
     void OnAttack()
     {
-        Instantiate(ammo, muzzle.transform.position, muzzle.rotation);
-        if(fireEffect != null) Instantiate(fireEffect, muzzle.transform.position, muzzle.rotation);
+        if (shootTimer <= 0)
+        {
+            Instantiate(ammo, muzzle.transform.position, muzzle.rotation);
+            Destroy(ammo, 5);
+            if (fireEffect != null) Instantiate(fireEffect, muzzle.transform.position, muzzle.rotation);
+            shootTimer = shootCooldown;
+        }
     }
 }

@@ -13,7 +13,6 @@ public class Health : MonoBehaviour
         get { return CurrentHealth / maxHealth; }
     }
 
-    float health = 0;
     bool destroyed = false;
 
     void Start()

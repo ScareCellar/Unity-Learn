@@ -13,12 +13,6 @@ public class Rocket : Ammo
         rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         //checking if object has health component
@@ -35,7 +29,7 @@ public class Rocket : Ammo
         }
 
             Instantiate(effect, transform.position, Quaternion.identity);
-        //Destroy(effect, 2.5f);
-        Destroy(gameObject);
+            Destroy(effect, 2.5f);
+            Destroy(gameObject);
     }
 }
