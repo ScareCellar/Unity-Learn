@@ -6,6 +6,8 @@ public class Rocket : Ammo
     Rigidbody rb;
     [SerializeField] GameObject effect;
     [SerializeField] int speed;
+    [SerializeField] AudioSource fireSound;
+    [SerializeField] AudioSource impactSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

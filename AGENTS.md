@@ -2,7 +2,7 @@
 - Project name: Unity Learn
 - Unity version: Unity 6000.3.2f1
 - Active game object:
-  - Name: Turret (2)
-  - Tag: Enemy
+  - Name: RocketChair
+  - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
