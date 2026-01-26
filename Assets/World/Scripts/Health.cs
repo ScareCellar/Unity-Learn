@@ -46,6 +46,8 @@ public class Health : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        if(CurrentHealth > maxHealth) CurrentHealth = maxHealth;
     }
     
     public void OnHeal(float amount)

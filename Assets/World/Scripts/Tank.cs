@@ -6,6 +6,7 @@ public class Tank : MonoBehaviour
 {
     [SerializeField] float speed = 5.0f;
     [SerializeField] float rotationSpeed = 90.0f; // rotation in degrees per second
+    [SerializeField] float jumpHeight = 15.0f; // rotation in degrees per second
 
     [SerializeField] GameObject ammo;
     [SerializeField] Transform muzzle;
@@ -19,17 +20,22 @@ public class Tank : MonoBehaviour
     InputAction moveAction;
     InputAction lookAction;
     InputAction attackAction;
+    InputAction jumpAction;
 
     Health health;
+    Rigidbody rb;
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         attackAction = InputSystem.actions.FindAction("Attack");
+        jumpAction = InputSystem.actions.FindAction("Jump");
 
         attackAction.started += ctx => OnAttack();
 
         health = GetComponent<Health>();
+
+        rb = GetComponent<Rigidbody>();
 
         shootTimer = shootCooldown;
     }
@@ -54,12 +60,10 @@ public class Tank : MonoBehaviour
         // rotate the tank, around the up axis (y-axis)
         transform.Rotate(Vector3.up * rotation * rotationSpeed * Time.deltaTime);
 
-        // check if "Fire" key is pressed, if so instantiate the ammo (rocket)
-        // ammo is instantiate at the muzzle position and rotation
-        //if (attackAction.WasPerformedThisFrame())
-        //{
-        //    Instantiate(ammo, muzzle.transform.position, muzzle.transform.rotation);
-        //}
+        if (jumpAction.ReadValue<float>() != 0.0f)
+        {
+            rb.AddRelativeForce(Vector3.down * jumpHeight, ForceMode.Impulse);
+        }
         healthBar.value = health.CurrentHealthPercentage;
         
     }
