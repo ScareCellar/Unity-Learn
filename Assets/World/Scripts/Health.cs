@@ -6,6 +6,7 @@ public class Health : MonoBehaviour
     [SerializeField] GameObject hitEffect;
     [SerializeField] GameObject destroyEffect;
 
+    [SerializeField] float health;
     public float CurrentHealth { get; set; }
 
     public float CurrentHealthPercentage
@@ -22,10 +23,10 @@ public class Health : MonoBehaviour
 
     public void OnDamage(float damage)
     {
-            Debug.Log($"Hit {gameObject}");
+        Debug.Log($"Hit {gameObject}");
         if(destroyed) return;
         CurrentHealth -= damage;
-
+        health = CurrentHealth;
         if (CurrentHealth <= 0)
         {
             destroyed = true;
