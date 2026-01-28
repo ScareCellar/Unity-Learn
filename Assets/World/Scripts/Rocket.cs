@@ -13,6 +13,7 @@ public class Rocket : Ammo
     {
         rb = GetComponent<Rigidbody>();
         rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
+        
     }
 
     private void OnCollisionEnter(Collision collision)
