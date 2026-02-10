@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    Actor actor;
+
     IMovable movable;
     IAttackable attackable;
     IJumpable jumpable;
@@ -10,7 +12,12 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        actor = GetComponent<Actor>();
         
+        movable = actor as IMovable;
+        attackable = actor as IAttackable;
+        jumpable = actor as IJumpable;
+        sprintable = actor as ISprintable;
     }
     void OnJump()
     {
@@ -19,7 +26,8 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        movable?.Move(value.Get<Vector2>());
+        Vector2 input = value.Get<Vector2>();
+        movable?.Move(new Vector3(input.x, 0, input.y));
     }
 
     void OnAttack()
